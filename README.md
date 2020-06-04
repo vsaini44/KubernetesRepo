@@ -10,8 +10,8 @@ Steps
 #################
 1) Login into all three servers and download the  install_all.sh script.
 2) Run it using 'bash install_all.sh'
-	> The script will setup docker repository and will install docker-ce packages.
-	> The script will setup kubernetes repository and will install required kubernetes packages.
+	> The script will setup docker repository and will install docker-ce packages \n.
+	> The script will setup kubernetes repository and will install required kubernetes packages \n.
 	
 
 3) Download the install_master.sh on the master node and execute the same using 'bash install_master.sh' 
