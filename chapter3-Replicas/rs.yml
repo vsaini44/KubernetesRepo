@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+
+metadata:
+  name: rs1
+
+spec:
+  replicas: 3
+  selector:
+    matchExpressions:
+      - key: env
+        operator: In
+        values:
+          - prod
+          - test
+  
+  template:
+    metadata:
+      labels:
+        env: prod
+    spec:
+      containers:
+      - name: cont1
+        image: nginx
+

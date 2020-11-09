@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ReplicationController
+
+metadata:
+  name: rc1
+
+spec:
+  replicas: 3
+  selector:
+    env: prod
+  
+  template:
+    metadata:
+      labels:
+        env: prod
+    spec:
+      containers:
+      - name: cont1
+        image: nginx
+
