@@ -1,0 +1,20 @@
+apiVersion: v1 
+kind: Pod 
+
+metadata:
+  name: pod2
+
+
+spec:
+  containers:
+    - name: cont1
+      image: nginx 
+      volumeMounts:
+        - name: vol1
+          mountPath: /vishal
+  volumes:
+    - name: vol1
+      gitRepo:
+        repository: https://github.com/vsaini44/Jenkins_repo.git
+        revision: master 
+        directory: .         
