@@ -11,4 +11,4 @@ wget -q -O - https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-ke
 echo deb http://apt.kubernetes.io/ kubernetes-xenial main | sudo tee /etc/apt/sources.list.d/kubernetes.list
 apt update
 apt install kubelet kubeadm -y
-
+sysctl net.bridge.bridge-nf-call-iptables=1
