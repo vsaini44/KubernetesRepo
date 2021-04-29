@@ -1,0 +1,37 @@
+# to troubleshoot the calico pods 
+Step 1) Run the following command to check the status of calico pods
+# kubectl get pods -n kube-system
+the output doesn't show the calio pods in ready state
+
+Step 2) Download the calio yaml file from the calio site 
+# wget https://docs.projectcalico.org/manifests/calico.yaml
+
+Step 3) Modify the calio file 
+Open the file with vim 
+# vim calico.yml
+go to line number 3692 or search for liveness in the file
+comment the following lines
+ livenessProbe:
+            exec:
+              command:
+              - /bin/calico-node
+              - -felix-live
+              - -bird-live
+            periodSeconds: 10
+            initialDelaySeconds: 10
+            failureThreshold: 6
+          readinessProbe:
+            exec:
+              command:
+              - /bin/calico-node
+              - -felix-ready
+              - -bird-ready
+            periodSeconds: 10
+########################################## 
+save and quit 
+
+Step 4) Apply the yaml manifest again 
+# kubectl apply -f calico.yaml
+
+Step 5) verify that the pods are in running state 
+# kubectl get pods -n kube-system
