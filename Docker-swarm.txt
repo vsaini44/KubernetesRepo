@@ -1,0 +1,103 @@
+Three ubuntu machine with docker installed on them
+
+Master  : 13.234.118.95  172.31.26.87
+Worker1 : 13.232.120.77  172.31.17.93
+Worker2 : 13.234.112.249 172.31.22.185
+
+############## GENERAL HELP COMMAND #################
+#docker swarm
+
+1) To initialize the docker manager 
+
+#docker swarm init --advertise-addr ipaddress of manager
+
+2) To check the current state of docker swarm
+
+#docker node ls 
+
+3) Find the commands to add worker or manager inside the setup 
+
+docker swarm join-token worker 
+############## OUTPUT ##################
+docker swarm join --token SWMTKN-1-06et104bbv53gjwk77wyumfgx4n1c5u46qvkao0wnzc6dzxezw-56x2t7e9oav75vh06135vdqyl 172.31.26.87:2377
+
+Or
+
+docker swarm join-token manager
+############## OUTPUT ##################
+docker swarm join --token SWMTKN-1-06et104bbv53gjwk77wyumfgx4n1c5u46qvkao0wnzc6dzxezw-9yrcucz9mwqctcafi4lstg8hq 172.31.26.87:2377
+
+4) Go to the worker and run the output of previous command
+
+#docker swarm join --token SWMTKN-1-06et104bbv53gjwk77wyumfgx4n1c5u46qvkao0wnzc6dzxezw-56x2t7e9oav75vh06135vdqyl 172.31.26.87:2377
+
+run the following commands on all the workers and go back to manager to check the status of your swarm setup
+#docker node ls
+
+5) Run docker info on manager to see swarm section
+# docker info
+############## OUTPUT ##################
+Swarm: active
+ NodeID: gshx97pzvtsyrf7ml8qkv3cpe
+ Is Manager: true
+ ClusterID: ovc8k0loykjkuvotxnr2keb4q
+ Managers: 1
+ Nodes: 3
+ Default Address Pool: 10.0.0.0/8
+ SubnetSize: 24
+ Orchestration:
+  Task History Retention Limit: 5
+ Raft:
+  Snapshot Interval: 10000
+  Number of Old Snapshots to Retain: 0
+  Heartbeat Tick: 1
+  Election Tick: 10
+#########################################
+
+
+6) Run the application ( like nginx, apache ) as a service on the docker swarm by putting replica's
+in picture 
+Before running the service, check the present status of ur swarm before launching service
+# docker ps >>> blank no container running
+# docker images >>> blank no images downloaded
+# docker service ls >>> no service in running on docker swarm 
+
+create  the service now 
+# docker service >>> to take the help
+
+#docker service create --replicas no.ofreplicas  -p contport:hostport --name nameofservice imagename
+example 
+docker service create --replicas 6 -p 80:80 --name web1 nginx
+
+Re-run the above commands to check the present state of ur swarm after launching service
+# docker ps >>> will show two containers on each node 
+# docker images >>> blank no images downloaded
+# docker service ls >>> no service in running on docker swarm 
+
+7) to check all the containers running 
+# docker service ps servicename
+
+
+8) to scale up/scale down the service replicas
+# docker service scale serviceName = no. of replica's count
+example
+# docker service scale web1=10
+or
+# docker service scale web1=2
+
+
+9) to update the image version on the running service 
+# docker service update --image newimageversion servicename
+example
+# docker service update --image nginx:1.14.0 web1 
+
+
+10) to shutdown one worker
+# docker node update --availability drain worker1
+
+
+
+
+
+
+ 
