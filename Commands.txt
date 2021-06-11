@@ -29,3 +29,13 @@ root@master:~# history
    28  cat abc 
    29  source abc  
    30  history 
+    kubectl get pods --show-labels
+   45  kubectl label pod pod1 red=green
+   46  kubectl label pod pod2 city=delhi
+   47  kubectl get pods --show-labels
+   48  kubectl get pods -l red=green
+   49  vim pod.yml 
+   51  kubectl create -f pod.yml  
+   52  kubectl get pods --show-labels 
+   53  kubectl get pods -l city=delhi
+
