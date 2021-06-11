@@ -1,0 +1,10 @@
+kind: Service
+metadata:
+  name: cip1
+spec:
+  selector:
+    red: green
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
