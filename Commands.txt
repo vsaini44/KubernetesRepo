@@ -44,5 +44,17 @@ root@master:~# history
    58  vim pod.yml 
    59  kubectl create -f pod.yml  
    61  kubectl get pods -o wide 
+   kubectl annotate pod pod1 author=vishal
+   64  kubectl describe pod pod1 
+
+   66  kubectl get pods 
+   67  kubectl get ns 
+   68  kubectl get pods -n kube-system
+   69  kubectl create ns ns1
+   70  kubectl get ns 
+   71  kubectl create -f pod.yml
+   72  kubectl create -f pod.yml -n ns1
+   73  kubectl get pods -n ns1 
+
 
 
