@@ -38,4 +38,11 @@ root@master:~# history
    51  kubectl create -f pod.yml  
    52  kubectl get pods --show-labels 
    53  kubectl get pods -l city=delhi
+   kubectl get nodes --show-labels
+   56  kubectl label node worker2 dc=mumbai
+   57  kubectl get nodes --show-labels
+   58  vim pod.yml 
+   59  kubectl create -f pod.yml  
+   61  kubectl get pods -o wide 
+
 
