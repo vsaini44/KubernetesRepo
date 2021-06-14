@@ -23,9 +23,6 @@ spec:
 2) run the following commands to check the rollout operation
 kubectl create -f dp.yml  
    86  kubectl get pods 
-   87  kubectl describe deployment dep1 
-   88  kubectl set image deployment/dep1 cont1q!
-   89  kubectl create -f dp.yml  
    90  vim dp.yml
    91  kubectl set image deployment/dep1 nginx=nginx:1.19 --record=true 
    92  kubectl get rs 
