@@ -1,0 +1,83 @@
+1) Create a nfs server 
+    1  hostname nfsserver 
+    2  apt update 
+    3  apt install nfs-server -y 
+    4  mkdir /datadir
+    5  chmod 777 /datadir
+    6  vim /etc/exports  add the following entry 
+/datadir *(rw,sync) --- save the file 
+
+    7  exportfs -r 
+    8  exportfs
+    9  ip a
+   10  history 
+
+2) install nfs-common on worker nodes 
+login into worker node 
+apt install nfs-common -y 
+
+
+3) You have to define a persistent vol
+# vim pv.yml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv1
+spec:
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteOnce 
+  persistentVolumeReclaimPolicy: Recycle
+  nfs:
+    path: /datadir
+    server: 172.31.14.235
+# kubectl create -f pv.yml  
+# kubectl get pv 
+
+
+4) Creating the pvc claim
+# vim pvc.yml
+apiVersion: v1
+kind: PersistentVolumeClaim
+
+metadata:
+  name: pvc1 
+
+spec:
+  resources:
+    requests:
+      storage: 2Gi
+  accessModes:
+    - ReadWriteOnce
+
+
+# kubectl create -f pvc.yml
+# kubectl get pvc
+
+5) create a pod defination with nfs volume 
+apiVersion: v1
+kind: Pod
+
+
+metadata:
+  name: pod1
+
+
+spec:
+  containers:
+    - name: cont1
+      image: nginx
+      volumeMounts:
+        - name: vol1
+          mountPath: /abc
+  volumes:
+    - name: vol1
+      persistentVolumeClaim:
+        claimName: pvc1
+
+
+6) Deploy the pod and check the status 
+kubectl apply -f pod.yml  
+   33  kubectl get pods 
+   34  kubectl exec -it pod1 /bin/bash
