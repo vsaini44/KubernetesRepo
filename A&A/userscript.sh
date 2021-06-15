@@ -15,7 +15,7 @@ create_user() {
 
 	#Create the user
 	printf "User creation\n"
-	useradd $user
+	useradd -m $user
 
 	#Create private Key for the user
 	printf "Private Key creation\n"
