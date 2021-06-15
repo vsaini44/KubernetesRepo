@@ -1,0 +1,39 @@
+reference link
+https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/
+
+1) install the metric server 
+#wget https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+
+2) edit the file
+#vim components.yml
+go to line no 137 
+put this line in there "--kubelet-insecure-tls"
+
+3) to verify 
+#kubectl get pods -n kube-system 
+you should be able to see metric pod running
+#kubectl top nodes 
+
+
+4) run the deployment and service 
+#kubectl apply -f https://k8s.io/examples/application/php-apache.yaml
+
+5) verify 
+#kubectl get deployment 
+#kubectl get svc 
+#kubectl get pods -o wide 
+
+6) create the hpa 
+# kubectl autoscale deployment php-apache --cpu-percent=50 --min=1 --max=10
+# kubectl get hpa 
+
+7) Test the load 
+open another terminal
+kubectl run -i --tty load-generator --rm --image=busybox --restart=Never -- /bin/sh -c "while sleep 0.01; do wget -q -O- http://php-apache; done"
+
+8) go back to hpa terminal 
+#kubectl get hpa -w 
+
+
+
+
