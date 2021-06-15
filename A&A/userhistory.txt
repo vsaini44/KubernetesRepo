@@ -1,0 +1,34 @@
+ 1  hostname master 
+    2  vim .kube/config 
+    3  useradd --help 
+    4  vim .kube/config 
+    5  kubectl get ns 
+    6  kubectl create ns tproject 
+    7  kubectl create ns sproject 
+    8  kubectl get clusterrole
+    9  kubectl describe clusterrole view | less -S 
+   10  kubectl describe clusterrole edit | less -S 
+   11  kubectl describe clusterrole cluster-admin | less -S 
+   12  vim role.yml
+   13  cp role.yml  role1.yml
+   14  vim role1.yml 
+   15  vim -O role.yml role1.yml 
+   16  vim rb.yml
+   17  vim role.yml 
+   18  vim role1.yml 
+   19  vim rb.yml
+   20  cat role.yml  >> role1.yml 
+   21  rm -rf role.yml 
+   22  vim role1.yml 
+   23  vim -O role1.yml  rb.yml 
+   24  kubectl create -f role1.yml 
+   25  kubectl get roles -n tproject
+   26  kubectl get roles -n sproject
+   27  kubectl create -f rb.yml 
+   28  kubectl get rolebinding -n sproject
+   29  kubectl get rolebinding -n tproject
+   30  vim pod.yml
+   31  kubectl create -f pod.yml  -n tproject 
+   32  kubectl create -f pod.yml  -n sproject 
+   33  vim -O rb.yml role1.yml  
+   34  history 
