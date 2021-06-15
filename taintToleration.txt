@@ -1,0 +1,64 @@
+1) Add taint to the worker nodes 
+kubectl taint node worker1 qwerty=abcxyz:NoSchedule
+
+2) Create a deployment with taint 
+#vim dp.yml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dp1
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+      containers:
+      - name: cont1
+        image: nginx:1.14.2
+~                               
+
+3) Deploy the deployment
+#kubectl create -f dp.yml
+# kubectl get pods -o wide 
+you will be able to see the pods are deployed on worker2 
+
+4) add the toleration in deployment defination 
+# kubectl delete deployment dp1 
+# vim dp.yml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dp1
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      tolerations:
+        - key: qwerty
+          operator: Equal
+          value: abcxyz
+          effect: NoSchedule
+
+      containers:
+      - name: cont1
+        image: nginx:1.14.2
+
+
+5) Create the deployment and verify 
+# kubectl create -f dp.yml
+# kubectl get pods -o wide 
+You should be able to see pods getting deployed on both the worker node 
+
+
+6) To remove the taint from the node 
+# kubectl taint node worker1 qwerty-
