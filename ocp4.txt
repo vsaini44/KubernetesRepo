@@ -1,0 +1,16 @@
+1) oc login -- to login into the cluster 
+2) oc whoami -- to verify the user you are logged in with 
+3) oc get project -- to see available project owned by the user 
+4) oc new-project project-name  -- to create new project 
+5) oc status -- to verify on which project are you working 
+6) oc project project_name  -- to switch to another project 
+7) oc get all -- to display all resources inside the current project 
+8) oc get all -n project_name -- to display the resources of mentioned project
+9) oc explain <resource_type> -- simple help from the system itself
+10) oc create -f manifestfile -- to create the resource from the manifest yaml
+11) oc get pods -- to show the pods in current project 
+12) oc get pods -o wide -- to show additional informaiton of pod 
+13) oc get pods --show-label -- to show the labels of the pod 
+14) oc get events -- to show the events in the currect project 
+15) oc describe <resource_type> <resource_name> -- to show more additional information about the resource
+16) oc exec -it podname -c contname /bin/bash -- allows us to login into the pod's container 
