@@ -24,3 +24,6 @@ oc get pods --show-labels
 oc label pod pod1 env=test(key=value) ---> to set the label on the pod 
 oc label pod pod1 env- ---> to remove the label 
 oc  get pods -l key=value 
+
+oc exec -it pod1 -c cont1 /bin/bash 
+
