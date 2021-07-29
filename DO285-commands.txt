@@ -1,0 +1,26 @@
+ oc login 
+ oc whoami 
+ oc whoami -c / -t 
+ oc get project 
+ oc new-project projectname 
+ oc status ---> to check the project on which you are working 
+ oc project projectname --> switch to another project 
+ oc delete project projectname
+ oc get all ---> all the resources in the project 
+
+ oc create -f pod.yml
+ oc get pods -w 
+ oc get pods 
+ oc get pods -o wide 
+
+>>> oc describe <resource_typpe> <resource_name>
+ oc describe pod pod1 
+
+ oc delete pod pod1 
+
+>>> Labels ?? 
+>>> grouping of same type of resources 
+oc get pods --show-labels
+oc label pod pod1 env=test(key=value) ---> to set the label on the pod 
+oc label pod pod1 env- ---> to remove the label 
+oc  get pods -l key=value 
