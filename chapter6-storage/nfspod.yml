@@ -14,5 +14,6 @@ spec:
           mountPath: /vishal
   volumes:
     - name: vol1
-      hostPath:
+      nfs:
+        server: <ipofnfsserver>
         path: /data
