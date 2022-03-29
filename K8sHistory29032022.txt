@@ -1,0 +1,38 @@
+kubectl create -f pod.yaml
+ 1010  kubectl get pods
+ 1011  vim pod.yaml
+ 1012
+  kubectl get pods
+ kubectl get pods  --show-label
+ kubectl get pods  --show-labels
+ kubectl label pod pod1 env=dev
+ kubectl label pod pod2 env=prod
+  kubectl get pods  --show-labels
+ vim pod.yaml
+
+ kubectl create -f pod.yaml
+ kubectl get pods  --show-labels
+ kubectl get pods -l env=prod
+
+ kubectl run image
+ kubectl run image --help
+ cat pod.yaml
+ kubectl get pods --show-labels
+ kubectl label pod pod1 dc=mumbai
+ kubectl get pods --show-labels
+ kubectl label pod pod1 env=prod
+ kubectl label pod pod1 env=prod --overwrite
+ kubectl get pods --show-labels
+ kubectl describe pod pod1 | less
+ kubectl annotate pod pod1 description="test pod for testing"
+ kubectl describe pod pod1 | less
+ kubectl get ns
+ kubectl create ns test-project1
+  kubectl get ns | grep test-project
+  kubectl get pods
+  kubectl get pods -n test-project
+ kubectl create -f pod.yaml
+ kubectl create -f pod.yaml  -n test-project
+ kubectl create -f pod.yaml  -n test-project1
+  kubectl get pods -n test-project1
+
