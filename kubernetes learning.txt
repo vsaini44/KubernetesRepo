@@ -1,0 +1,102 @@
+####Changing the ip pool for pod cidr 
+https://stackoverflow.com/questions/60176343/how-to-make-the-pod-cidr-range-larger-in-kubernetes-cluster-deployed-with-kubead
+
+
+ipvs : ip virtual server  : allow us to configure more option then load balancing for svc on the backend node
+https://kubernetes.io/blog/2018/07/09/ipvs-based-in-cluster-load-balancing-deep-dive/
+
+
+
+https://sookocheff.com/post/kubernetes/understanding-kubernetes-networking-model/
+
+
+https://www.openlogic.com/blog/granting-user-access-your-kubernetes-cluster
+
+
+configuring nginx-ingress controller
+###############################################################################################
+https://github.com/nginxinc/kubernetes-ingress
+https://www.youtube.com/watch?v=sHUSiM8jqbA
+https://www.youtube.com/watch?v=PY_nbs8-y54
+https://devopscube.com/setup-ingress-kubernetes-nginx-controller/
+https://github.com/vipin-k/ingress-controller-domain-name-or-path-based-routing
+
+
+
+kubectl patch pv my-pv-name -p '{"spec":{"claimRef": null}}'
+to again use the pv once pvc is deleted
+
+
+steps happened during kubeadm init process
+####
+https://kubernetes.io/docs/reference/setup-tools/kubeadm/implementation-details/
+
+
+
+setting up external load balancer (aws) through kubernetes load balancer service 
+####
+https://blog.scottlowe.org/2018/09/28/setting-up-the-kubernetes-aws-cloud-provider/
+
+
+
+etcd learning
+
+to check all the pods in kubesystem namespace
+ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key get /registry/pods/kube-system --prefix --keys-only
+
+ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key get /registry/pods/kube-system/etcd-master -w json
+
+####
+https://medium.com/better-programming/a-closer-look-at-etcd-the-brain-of-a-kubernetes-cluster-788c8ea759a5
+access etcd
+    >>> on master 
+        ps -aux | grep etcd == copy the advertise url 
+        kubectl exec -it etcd.master.example.com -n kube-system sh 
+            >> apt update && apt install bash && apt install jq
+            >> export atu=https://172.31.35.181:2379
+            >> export ETCDCTL_API=3
+            >> alias vicky='etcdctl  --endpoints $atu --cacert ca.crt --cert server.crt  --key server.key'
+            >> vicky  get / --prefix  --keys-only
+            >> vicky get /registry/pods/kube-system/etcd-master.example.com -w json ( checking info related to pod in kube-system namespace name as etcd-master.example.com )
+            >> vicky get /registry/pods/kube-system/etcd-master.example.com -w json| jq '.kvs[0].value' | cut -d'"' -f2 | base64 --decode ( check the info )
+
+
+            OR
+            
+            >> cd /etc/kubernetes/pki/etcd
+            >> etcdctl --endpoints https://172.31.35.181:2379 --cacert ca.crt --cert server.crt --key server.key get  / --prefix --keys-only
+        
+ttps://www.stackrox.com/post/2020/01/kubernetes-networking-demystified/
+
+https://www.projectcalico.org/comparing-kube-proxy-modes-iptables-or-ipvs/
+
+https://stackoverflow.com/questions/62465022/nginx-ingress-use-https-for-backend-based-on-path
+
+https://stackoverflow.com/questions/64647258/how-nginx-ingress-controller-back-end-protocol-annotation-works-in-path-based-ro?noredirect=1&lq=1
+
+https://github.com/ContainerSolutions/k8s-deployment-strategies
+
+https://blog.container-solutions.com/kubernetes-deployment-strategies
+
+istio service mash
+
+https://thenewstack.io/deployment-strategies/
+
+###################################
+If downtime is not an issue, then recreate is the easiest deployment strategy to implement.
+
+If downtime is an issue, ramped or blue/green deployments are generally a good fit, with blue/green deployments being more expensive and slightly more complicated to setup.
+
+Canary and A/B Testing should be used if there is little confidence in the quality of the release. These strategies along with shadow will require extra cluster components such as service meshes, increasing cost and complexity.
+################################### 
+
+https://codeburst.io/kubernetes-watches-by-example-bc1edfb2f83
+
+https://engineering.bitnami.com/articles/a-deep-dive-into-kubernetes-controllers.html
+
+
+
+
+cluster deployment
+####
+https://medium.com/containerum/4-ways-to-bootstrap-a-kubernetes-cluster-de0d5150a1e4
