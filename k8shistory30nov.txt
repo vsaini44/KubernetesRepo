@@ -1,0 +1,662 @@
+1  clear
+    2  yum install docker
+    3  clear
+    4  docker info
+    5  docker version
+    6  systemctl start docker
+    7  docker version
+    8  history
+    9  #docker run -d --name=cont1 docker.io/httpd
+   10  docker ps
+   11  docker ps -a
+   12  docker images
+   13  docker run -d --name=cont1 docker.io/httpd
+   14  docker images
+   15  docker ps
+   16
+   17  docker inspect cont1
+   18  curl 172.17.0.2
+   19  history
+   20  clear
+   21  docker inspect cont1 | grep -i ipad
+   22  clear
+   23  docker ps
+   24  docker stop cont1
+   25  docker rm cont1
+   26  #docker run -d --name=cont1 httpd
+   27  docker images
+   28  docker run -d --name=cont1 -p 8080:80  httpd
+   29  docker ps
+   30  docker inspect cont1 | grep -i ip
+   31  ip -br a
+   32
+   33  history
+   34  clear
+   35  ldocker ps
+   36  docker ps
+   37  docker exec -it cont1 /bin/bash
+   38  docker stop cont1
+   39  docker ps
+   40  docker ps -a
+   41  docker start cont1
+   42  docker exec -it cont1 /bin/bash
+   43  docker stop cont1
+   44  docker rm cont1
+   45  docker run -d --name=cont1 -p 8080:80  httpd
+   46  docker exec -it cont1 /bin/bash
+   47  clear
+   48  docker ps
+   49   docekr ps -a
+   50  systemctl start docker
+   51  docker ps -a
+   52  docker rm -f cont1
+   53  #docker run -d --name=cont1 -v /data:/test httpd
+   54  ls /
+   55  docker run -d --name=cont1 -v /data:/test httpd
+   56  docker exec -it cont1 /bin/bash
+   57  docker run -d --name=cont2 -v /data1:/test1 nginx
+   58  docker exec -it cont2 /bin/bash
+   59  getenforce
+   60  setenforce 0
+   61  docker exec -it cont2 /bin/bash
+   62  cd /data1
+   63  ls
+   64  cd
+   65  docker rm -f cont1 cont2
+   66  docker volume ls
+   67  docker volume create vol1
+   68  cd /var/lib/docker/
+   69  docker inspect vol1
+   70  docker run -d --name=cont1 -v vol1:/test nginx
+   71  docker ps
+   72  docker exec -it cont1 /bin/bash
+   73  history
+   74  docker exec -it cont1 /bin/bash
+   75  docker ps
+   76  docker ps -a
+   77  docker rm -f cont1
+   78
+   79  docker ps
+   80  docker ps -a
+   81  brctl show
+   82  docker network ls
+   83  docker run -d --name=cont1 httpd
+   84  brctl show
+   85  docker run -d --name=cont2 httpd
+   86  brctl show
+   87  docker inspect cont1 | grep -i ipadd
+   88  docker inspect cont2 | grep -i ipadd
+   89  docker network create -h
+   90  docker network create --subnet 10.0.0.0/24 net1
+   91  docker network ls
+   92  brctl show
+   93  docker run -d --name=cont3 --network=net1 httpd
+   94  docker inspect cont3 | grep -i ip
+   95  brctl show
+   96  docker ps
+   97  docker attach -h
+   98  docker network attach -h
+   99  docker network connect
+  100  docker network connect bridge cont3
+  101  docker inspect cont3 | grep -i ip
+  102  brctl show
+  103  history
+  104  docker run -d --name=cont4 --net=host httpd
+  105  docker ps
+  106  ip -br a
+  107  curl 172.31.93.162
+  108  docker inspect cont4
+  109  history
+  110  docker network ls
+  111  docker run -d --name=cont5 --net=none httpd
+  112  docker ps
+  113  docker inspect cont5
+  114
+  115  history
+  116  cat /etc/hosts
+  117  clear
+  118  vim a
+  119  bash a
+  120  kubectl get nodes
+  121  clear
+  122  vim a
+  123  free -m
+  124  lscpu
+  125
+  126  vim a
+  127  vim cluster_initialized.txt
+  128  vim a
+  129
+  130  vim /etc/kubernetes/admin.conf
+  131  vim a
+  132  kubeadm token create --print-join-command
+  133  ip -br a
+  134  kubectl get nodes
+  135  vim a
+  136
+  137  #kubectl <verb> <resource_type> <resource_name>
+  138  kubectl get nodes
+  139  kubectl get nodes -o wide
+  140  kubectl describe node node1
+  141  clear
+  142  alias k=kubectl
+  143  k get nodes
+  144  vim pod.yaml
+  145
+  146  k create -f pod.yaml
+  147  k get pods -o wide
+  148  k delete pod pod1
+  149
+  150  clear
+  151  ls
+  152  rm r-f pod.yaml
+  153  clear
+  154  k get pods
+  155  clear
+  156  vim pod.yml
+  157  k --help
+  158  k api-versions
+  159  k api-resources
+  160  vim pod.yml
+  161  k create -f pod.yml
+  162  k get pods
+  163  k get po
+  164  k get pods -o wide
+  165  history
+  166  cat pod.yml
+  167
+  168  k get pods
+  169  k get pods -o wide
+  170  k describe pod pod1 | less
+  171
+  172  k exec -it pod1 -c cont1 /bin/bash
+  173  k exec -it pod1 -c cont2 /bin/bash
+  174  k exec pod1 -c cont2 ls /
+  175  clear
+  176  kubectl explain pod
+  177  kubectl explain pod.metadata
+  178  vim pod.yml
+  179  k create -f pod.yml
+  180  alias k=kubectl
+  181  k create -f pod.yml
+  182  k get pods
+  183  k get pods -w
+  184
+  185  k create -f pod.yml
+  186  k apply -f pod.yml
+  187  vim pod.yml
+  188  k get pods
+  189  cat pod.yml
+  190  k apply -f pod.yml
+  191   k get pods
+  192  k delete pod pod2
+  193   k get pods
+  194  k logs pod1
+  195  k logs pod1 -c cont2
+  196
+  197  k describe pod pdo1
+  198  k describe pod pod1
+  199  k get events
+  200  k get pods -n kube-sytem
+  201  k get pods -n kube-system
+  202  clear
+  203  history
+  204
+  205  k port-forward -h
+  206  k port-forward --address 0.0.0.0 pod/pod1 8080:80
+  207  history
+  208
+  209  clear
+  210  k get pods
+  211
+  212  k delete pod pdo1
+  213  k delete pod pod1
+  214  clear
+  215  vim pod.yml
+  216  k get pods
+  217  k create -f pod.yml
+  218  k get pods
+  219  vim pod.yml
+  220
+  221  k create -f pod.yml
+  222  k get pod.yml
+  223  k get po
+  224  k get pods -o wide
+  225  k get pods --show-labels
+  226  k label pod pod1 color=red
+  227  k get pods --show-labels
+  228  k label pod pod2 city=delhi
+  229  k get pods --show-labels
+  230  k label pod pod1 city=mumbai
+  231  k get pods --show-labels
+  232  k label pod pod1 color=green
+  233
+  234  k get pods --show-labels
+  235  k get pods -l city=delhi
+  236  vim pod.yml
+  237  k create -f pod.yml
+  238  k get pods --show-labels
+  239  k get pods -l city=mumbai
+  240  k label pod pod2 city=kolkata
+  241  k label pod pod2 city=kolkata --overwrite
+  242  k get pods --show-labels
+  243  vim pod.yml
+  244
+  245  k create -f pod.yml
+  246  k apply -f pod.yml
+  247  k get pods --show-labels
+  248  history
+  249  cat pod.yml
+  250  vim pod.yml
+  251  history
+  252  cat pod.yml
+  253  alias k=kubectl
+  254  k get nodes
+  255  k get pods
+  256  k get pods --show-labels
+  257  k label pod pod1 city-
+  258  k get pods --show-labels
+  259  celar
+  260
+  261  k describe pod pod1 | less
+  262  k annotate pod pod1 description="test instance"
+  263  k describe pod pod1 | less
+  264
+  265  k get ns
+  266
+  267  k get pods
+  268  vim pod.yml
+  269
+  270  k create -f pod.yml
+  271  k create ns testspace
+  272  k get ns
+  273  \
+  274  k create -f pod.yml  -n testspace
+  275  k get pods -n testspace
+  276  history
+  277  disk ssd / disk hdd
+  278
+  279  k get pods
+  280  k delete pod pod1 pod2 pod3
+  281  k get pods
+  282
+  283  k get pods
+  284  vim rc.yaml
+  285
+  286  k get pods
+  287  k create -f rc.yaml
+  288  k get rc
+  289  k get pods
+  290  k delete pod rc1-dwm6c
+  291  k get pods
+  292  k get rs
+  293  k get rc
+  294  k get pods --show-labels
+  295  vim pod.yml
+  296  k create -fpo
+  297  k create -f pod.yml
+  298  k get pods --show-labels
+  299  k scale rc/rc1 --replicas=6
+  300  k get pods --show-labels
+  301  history
+  302  cat rc.yaml
+  303  clear
+  304  k get pods
+  305  k delete rc rc1
+  306
+  307  cp rc.yaml rs.ayml
+  308  mv rs.ayml rs.yaml
+  309  vim rs.yaml
+  310  vim -O rc.yaml rs.yaml
+  311  clear
+  312  k create -f rs.yaml
+  313  k get opds
+  314  k get pods
+  315  k delete pod rs1-dgnz4
+  316  k get pods
+  317  cat rs.yaml
+  318  k delete rs rs1
+  319
+  320  cat rc.yaml
+  321  k create -f rc.yaml
+  322  k get pods --show-labels
+  323  cat rs.yaml
+  324  k create -f rs.yaml
+  325  k get pods --show-labels
+  326  k describe pod rc1-tv6dm | grep -i controlled
+  327  vim rc.yaml
+  328
+  329  k apply -f rc.yaml
+  330  k describe pod rc1-tv6dm | grep -i controlled
+  331  k get pods --show-labels
+  332  clear
+  333  cat rs.yaml
+  334  k get pods
+  335  cat pod.yml
+  336  vim pod.yml
+  337   k create -f pod.yml
+  338  cat rs.yaml
+  339
+  340  ls
+  341  cat pod.yml  rc.yaml  > test.yaml
+  342  cat test.yaml
+  343   vim test.yaml
+  344  k get pods
+  345  k delete rc rc1
+  346  k delete rs rs1
+  347  k create -f test.yaml
+  348  k get pods
+  349  vim test.yaml
+  350  k get pods --show-labels
+  351  k decribe pod pod3 | grep -i control
+  352  k describe pod pod3 | grep -i control
+  353  cat rs.yaml
+  354  cp rs.yaml rs1.yaml
+  355  vim rs1.yaml
+  356  k egt pods
+  357  k get pods
+  358
+  359  k delete rc rc1
+  360  k get pods
+  361  cat rs1.yaml
+  362  k create -f rs1.yaml
+  363  vim rs1.yaml
+  364
+  365  k create -f rs1.yaml
+  366  k get pods --show-labels
+  367  cat rs
+  368  cat rs1.yaml
+  369  k get pods
+  370  k delete rs rs2
+  371
+  372  k get pods
+  373  vim rc.yaml
+  374
+  375  k create -f rc.yaml
+  376  k get pods -o wide
+  377  vim rs
+  378  k create -f rs.yaml
+  379  k get pod
+  380  k get rc
+  381  k get rs
+  382  k get pod -o wide
+  383  k delete rs rs1
+  384  k delete rc rc1
+  385  clear
+  386  cp rs.yaml ds.yaml
+  387  vim ds.yaml
+  388  k create -f ds.yaml
+  389  k get pods -o wide
+  390  cat ds.yaml
+  391
+  392  alias k=kubectl
+  393  k get nodes
+  394  k get all
+  395  k get pods -A
+  396
+  397  k get all svc,deployment -A
+  398  k get all svc -A
+  399  k get  svc -A
+  400  k get  svc,deployment -A
+  401  k get  svc,rc -A
+  402  k get  svc,pods -A
+  403  k get pods
+  404  k delete daemonset ds1
+  405
+  406  ls
+  407  vim pod.yml
+  408
+  409  k get pods
+  410  k create -f pod.yml
+  411  k get pods -o wide
+  412  k delete pod pod1
+  413  k create -f pod.yml
+  414  k get pods -o wide
+  415  curl 192.168.104.27
+  416  clear
+  417  k exec -it pod1 -- /bin/bash
+  418  curl 192.168.104.27
+  419  vim pod.yml
+  420
+  421  k create -f pod.yml
+  422  k get pods -o wide
+  423
+  424  k exec pod2 curl 192.168.104.27
+  425  clear
+  426  k get pods
+  427  k get pods --show-labels
+  428  vim svc.yml
+  429
+  430  k create -f svc.yml
+  431  k get svc
+  432  k get pods -o wide
+  433  k describe svc cip1
+  434  curl 10.96.121.17
+  435  k delete pod pod1
+  436  k get pods
+  437  k describe svc cip1
+  438  curl 10.96.121.17
+  439  k label pod pod2 env=prod
+  440  curl 10.96.121.17
+  441  k describe svc cip1
+  442  k get pods -o wide
+  443
+  444  k get svc
+  445  k get pods
+  446  \
+  447  vim pod.yml
+  448  kubectl create -f pod.yml
+  449  k get pods
+  450  k exec -it webpod /bin/bash
+  451  ping cip1.default.svc.cluster.local
+  452  history
+  453  cat svc.yml
+  454  clear
+  455  k get pods
+  456  k delete pod pod2 webpod
+  457  k describe svc svc1
+  458  k describe svc cip1
+  459  vim rc.yaml
+  460
+  461  k create -f rc.yaml
+  462
+  463  k get pods
+  464  k exec -it rc1-htwzj /bin/bash
+  465  k exec -it rc1-mjf8c /bin/bash
+  466
+  467  k get svc
+  468  curl 10.96.121.17
+  469  clear
+  470  k get svc
+  471  cp svc.yml nip.yml
+  472  vim nip.yml
+  473  k create -f nip.yml
+  474  k get svc
+  475  curl 10.109.228.17:80
+  476  curl 172.31.87.72:30080
+  477  cat nip.yml
+  478  histiry
+  479  history
+  480  cat nip.yml
+  481
+  482  k get pods
+  483  k get rc
+  484  k delete rc rc1
+  485
+  486  clear
+  487  ls
+  488  vim pod.yml
+  489  k explain pod.volume
+  490  k explain pod.volumes
+  491  k explain pod.spec.volumes
+  492  vim pod.yml
+  493  k create -f pod.yml
+  494  k get po -o wide
+  495  k exec -it pod1 -c cont1 /bin/bash
+  496  k exec -it pod1 -c cont2 /bin/bash
+  497  history
+  498  cat pod.yml
+  499  vim pod.yml
+  500
+  501  cp pod.yml  gitpod.yaml
+  502
+  503  vim gitpod.yaml
+  504  k create -f gitpod.yaml
+  505  k exec -it pod2 /bin/bash
+  506  cat gitpod.yaml
+  507  cp  pod.yml  hostpod.yaml
+  508
+  509  vim hostpod.yaml
+  510  cat hostpod.yaml
+  511  k create -f hostpod.yaml
+  512  k get pods -o wide
+  513  k exec -it pod3 /bin/bash
+  514  k delete pod pod3
+  515  k create -f hostpod.yaml
+  516  k get pods -o wide
+  517  k exec -it pod3 /bin/bash
+  518
+  519  vim gitpod.yaml hostpod.yaml  -O
+  520  clear
+  521  yum install nfs-server
+  522  rpm -qa |grep nfs
+  523
+  524  mkdir /nfsdir
+  525  chmod 777 /nfsdir/
+  526  echo "/nfsdir *(rw,sync)" >> /etc/exports
+  527  systemctl restart nfs-server.service
+  528  exportfs -r
+  529  exportfs
+  530  ip -br a
+  531  k get pods
+  532  k delete pod pod1 pod2 pod3
+  533  vim pod.yml
+  534
+  535  k create -f pod.yml
+  536  k getp ods
+  537
+  538  k get pods
+  539  k exec -it pod1 /bin/bash
+  540  k get pods -o wide
+  541  k delete pod pod1
+  542  k create -f pod.yml
+  543  k get pods -o wide
+  544  k delete pod pod1
+  545  k create -f pod.yml
+  546  k get pods -o wide
+  547  exit
+  548  k delete pod pod1
+  549  alias k=kubectl
+  550  k delete pod pod1
+  551  k create -f pod.yml
+  552  k get pods -o wide
+  553  k exec -it pod1 /bin/bash
+  554  cat pod.yml
+  555
+  556  mkdir /newpv
+  557  chmod 777 /newpv
+  558  echo "/newpv *(rw,sync)" >> /etc/exports
+  559  exportfs -r
+  560  exportfs
+  561  vim pv.yaml
+  562  ip -br a
+  563  vim pv.yaml
+  564  k create -f pv.yaml
+  565  alias k=kubectl
+  566  k create -f pv.yaml
+  567  k get pv
+  568  vim pvc.yaml
+  569  k create -f pvc.yaml
+  570  k get pv
+  571  vim pod.yml
+  572
+  573  k get pods
+  574  k delete pod pod1
+  575  systemctl start nfs-server
+  576  systemctl enable nfs-server
+  577
+  578  k create -f pod.yml
+  579  k get pods
+  580  k get pods  -w
+  581  k exec -it pod1 /bin/bash
+  582  vim -O pv.yaml pvc.yaml pod.yml
+  583  clear
+  584  k get pods
+  585  k exec -it pod1 /bin/bash
+  586  l
+  587  clear
+  588  k delete pod pod1
+  589  cp pod.yml envpod.yaml
+  590  vim envpod.yaml
+  591
+  592  k create -f pod.yml
+  593  k get pod
+  594  k exec -it pod1 /bin/bash
+  595  k delete pod pod1
+  596  k create -f envpod.yaml
+  597  k get pods
+  598  k exec -it pod1 /bin/bash
+  599  k exec -it pod1 /bin/sh
+  600  vim envpod.yaml
+  601  k create -f envpod.yaml
+  602  k get pods
+  603  k exec -it pod2 /bin/sh
+  604  clear
+  605  cat envpod.yaml
+  606
+  607  k get pods
+  608  k delete pod pod1 pod2
+  609  vim pod.yml
+  610
+  611  k create -f pod.yml
+  612  k get pods
+  613  k exec -it pod1 /bin/bash
+  614  cat pod.yml
+  615  k create cm config1 --from-literal=java=/opt/java
+  616  k describe cm config1
+  617  k delete pod pod1
+  618  vim pod.yml
+  619  k create -f pod.yml
+  620  k exec -it pod1 /bin/bash
+  621  k create cm config1 --from-literal=java=/var/java -n testns
+  622* k get n
+  623  k create cm config1 --from-literal=java=/var/java -n testspace
+  624  k create -f pod.yml -n testspace
+  625  k exec -it pod1 -n testspace  /bin/bash
+  626  history
+  627  cat pod.yml
+  628  clear
+  629  k create secret generic sec1 --from-literal=pass=redhat@123
+  630  k describe secret sec1
+  631  k get secret sec1 -o yaml
+  632  echo "cmVkaGF0QDEyMw==" | base64 -d
+  633  vim pod.yml
+  634  k delete pod pod1
+  635
+  636  k create -f pod.yml
+  637  k get pods
+  638  k exec -it pod1 /bin/bash
+  639  clear
+  640  vim pod.yml
+  641
+  642  k create secret
+  643  k create secret tls -h | less
+  644  k create secret docker-registry -h | less
+  645
+  646  vim file1.txt
+  647
+  648  k create cm config2 --from-file=file1.txt
+  649  k describe cm config2
+  650  vim pod.yml
+  651
+  652  k delete pod pod1
+  653  k create -f pod.yml
+  654  k exec -it pod1 /bin/bash
+  655  history
+  656  cat pod.yml
+  657
+  658  vim pod.yml
+  659  history
+  660  cat pod.yml
+  661  history
+[root@node1 ~]#
