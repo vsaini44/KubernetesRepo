@@ -1,0 +1,2 @@
+# to set the hostname of machines for setting k8s cluster
+hostnamectl set-hostname master 
