@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #To take from the admin-cluster config (to modify)
-certificate_data="LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLSS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo="
-server="https://x.x.x.x:6443"
+certificate_data=""
+server=""
 
 #The default path for Kubernetes CA
 ca_path="/etc/kubernetes/pki"
