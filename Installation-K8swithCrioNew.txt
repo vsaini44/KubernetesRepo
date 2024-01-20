@@ -1,5 +1,3 @@
-
-
 # run these commands on all machines
 export VERSION=1.28
 export OS=xUbuntu_22.04
@@ -11,8 +9,6 @@ rm -rf /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list
 rm -rf /etc/apt/sources.list.d/devel:kubic:libcontainers:stable:cri-o*
 
 ### adding crio repository and installing it
-
-
 echo "deb [signed-by=/usr/share/keyrings/libcontainers-archive-keyring.gpg] https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/$OS/ /" > /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list
 echo "deb [signed-by=/usr/share/keyrings/libcontainers-crio-archive-keyring.gpg] https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable:/cri-o:/$VERSION/$OS/ /" > /etc/apt/sources.list.d/devel:kubic:libcontainers:stable:cri-o:$VERSION.list
 
@@ -54,9 +50,12 @@ sudo sysctl --system
 
 #on master
 
-kubeadm init --pod-network-cidr=192.168.0.0/16 >> cluster_initialized.txt
+kubeadm init >> cluster_initialized.txt
 mkdir /root/.kube
 cp /etc/kubernetes/admin.conf /root/.kube/config
-kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/calico.yaml
+
+#doing the calico configuration 
+curl https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/calico.yaml -O
+kubectl apply -f calico.yaml
 systemctl restart kubelet.service
 kubeadm token create --print-join-command
