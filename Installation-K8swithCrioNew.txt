@@ -7,6 +7,7 @@ rm -rf /usr/share/keyrings/libcontainers-archive-keyring.gpg
 rm -rf /usr/share/keyrings/libcontainers-crio-archive-keyring.gpg
 rm -rf /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list
 rm -rf /etc/apt/sources.list.d/devel:kubic:libcontainers:stable:cri-o*
+rm -rf /etc/apt/keyrings/kubernetes-ap*
 
 ### adding crio repository and installing it
 echo "deb [signed-by=/usr/share/keyrings/libcontainers-archive-keyring.gpg] https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/$OS/ /" > /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list
