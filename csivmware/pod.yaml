@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+
+metadata:
+  name: clientpod
+
+spec:
+  volumes:
+    - name: vol1
+      persistentVolumeClaim:
+        claimName: example-pvc
+  containers:
+    - name: cont1
+      image: nginx
+      volumeMounts:
+        - name: vol1
+          mountPath: /data12
