@@ -1,0 +1,45 @@
+338  kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/vsphere-csi-driver/v3.0.0/manifests/vanilla/namespace.yaml
+  339  k get ns
+  340  kubectl config set-context --current --namespace=vmware-system-csi
+  341  k describe nodes | grep -i taint
+  342  cd csi-rnd/
+  343  ls
+  344  cat csi-vsphere.conf
+  345  kubectl create secret generic vsphere-config-secret --from-file=csi-vsphere.conf --namespace=vmware-system-csi
+  346  ls
+  347  vim vsphere-csi-driver.yaml
+  348  k create -f vsphere-csi-driver.yaml
+  349  k get all
+  350  k get pods -o wide
+  351  k get pods -o wide  -w
+  352  k get pods
+  353  k describe pod vsphere-csi-node-sjjlp
+  354  k get pods
+  355  k get pods -w
+  356  k describe pod vsphere-csi-controller-798cd9cc56-6drq6
+  357  k get pods -w
+  358  k get all
+  359  clear
+  360  k get csidrivers
+  361  k get CSINodes
+  362  l
+  363  ls
+  364  cat sc.yaml
+  365  k create -f sc.yaml
+  366  k get sc
+  367  k create -f pvc.yml
+  368  k get pvc
+  369  k get pv
+  370  k get pvc
+  371  k create -f pod.yaml
+  372  k get pods
+  373  k get pods -o wide
+  374  k describe pod client
+  375  k describe pod clientpod
+  376  k exec -it clientpod /bin/bash
+  377  k delete pod clientpod
+  378  k create -f pod.yaml
+  379  k get pods -o wide
+  380  k get pods -o wide -w
+  381  k exec -it clientpod /bin/bash
+  382  history
