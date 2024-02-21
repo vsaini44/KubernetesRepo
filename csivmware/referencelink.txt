@@ -1,1 +1,6 @@
 https://docs.vmware.com/en/VMware-vSphere-Container-Storage-Plug-in/3.0/vmware-vsphere-csp-getting-started/GUID-606E179E-4856-484C-8619-773848175396.html
+
+
+
+enable the uuid on nodes as well
+https://kb.vmware.com/s/article/52815
