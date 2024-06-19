@@ -1,0 +1,13 @@
+Download the helm code
+# https://get.helm.sh/helm-v3.15.2-linux-386.tar.gz
+
+Extract the helm source code and copy the binry to /bin
+ls
+tar -zxvf helm-v3.15.2-linux-386.tar.gz 
+ls
+cd linux-386/
+ls
+cp helm  /bin
+helm 
+  
+
