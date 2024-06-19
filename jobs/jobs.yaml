@@ -1,0 +1,14 @@
+apiVersion: batch/v1
+kind: Job
+
+metadata:
+  name: job1
+spec:
+  template:
+    spec:
+      containers:
+      - name: cont1
+        image: httpd
+        command: ["/bin/sleep"]
+        args: ["20"]
+      restartPolicy: Never
