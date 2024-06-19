@@ -7,7 +7,7 @@ https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkth
 2) edit the file
 #vim components.yml
 go to line no 137 
-put this line in there "--kubelet-insecure-tls"
+put this line in there "- --kubelet-insecure-tls"
 After modification run 
 # kubectl apply -f components.yaml
 
