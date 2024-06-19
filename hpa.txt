@@ -12,7 +12,7 @@ After modification run
 # kubectl apply -f components.yaml
 
 3) to verify 
-#kubectl get pods -n kube-system 
+#kubectl get pods -n kube-system  | grep metrics
 you should be able to see metric pod running
 #kubectl top nodes 
 
