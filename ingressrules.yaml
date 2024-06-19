@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+
+metadata:
+  name: ing1
+
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: "dev1.qualcomm.com"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: svc1
+            port:
+              number: 8080
