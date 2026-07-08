@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Pod
+
+metadata:
+  name: pod2
+
+spec:
+  volumes:
+    - name: vol1
+      emptyDir: {}
+  containers:
+    - name: cont1
+      image: busybox:latest
+      command:
+        - sh
+        - -c
+        - |
+          while true
+          do
+          echo "$(date) log entry" >> /vishal/data.log
+          sleep 5
+          done
+      volumeMounts:
+        - name: vol1
+          mountPath: /vishal
+
+
+    - name: sidecar1
+      image: busybox:latest
+      command:
+        - sh
+        - -c
+        - |
+          tail -f /vishal/data.log
+      volumeMounts:
+        - name: vol1
+          mountPath: /vishal
