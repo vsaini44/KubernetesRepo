@@ -1,0 +1,22 @@
+[root@master ~]$ cat pod.yaml
+apiVersion: v1
+kind: Pod
+
+metadata:
+  name: pod1
+
+spec:
+  initContainers:
+    - name: initwait
+      image: busybox:latest
+      command:
+        - sh
+        - -c
+        - |
+          echo "the wait game is starting"
+          sleep 25
+          echo "the wait game is over"
+
+  containers:
+    - name: cont1
+      image: nginx
