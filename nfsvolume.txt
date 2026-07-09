@@ -4,8 +4,7 @@
     3  sudo apt install nfs-server -y 
     4   sudo mkdir /datadir
     5  sudo chmod 777 /datadir
-    6  sudo vim /etc/exports  add the following entry 
-/datadir *(rw,sync) --- save the file 
+    6  echo "/datadir *(rw)" >> /etc/exports  
 
     7  sudo exportfs -r 
     8  sudo exportfs
