@@ -1,20 +1,20 @@
 1) Create a nfs server 
     1  hostname nfsserver 
-    2  apt update 
-    3  apt install nfs-server -y 
-    4  mkdir /datadir
-    5  chmod 777 /datadir
-    6  vim /etc/exports  add the following entry 
+    2  sudoapt update 
+    3  sudo apt install nfs-server -y 
+    4   sudo mkdir /datadir
+    5  sudo chmod 777 /datadir
+    6  sudo vim /etc/exports  add the following entry 
 /datadir *(rw,sync) --- save the file 
 
-    7  exportfs -r 
-    8  exportfs
-    9  ip a
+    7  sudo exportfs -r 
+    8  sudo exportfs
+    9  sudo ip a
    10  history 
 
 2) install nfs-common on worker nodes 
 login into worker node 
-apt install nfs-common -y 
+sudo apt install nfs-common -y 
 
 
 3) create a pod defination with nfs volume 
